@@ -1,27 +1,37 @@
 package com.example.dp.dogpark.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class User {
 
 	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	@Column
 	private String email;
 	
-	@OneToMany(targetEntity=Dog.class)
+	@OneToMany
 	private List<Dog> dogs;
 
-	public User(String email, List<Dog> dogs) {
+	public User(String email, ArrayList<Dog> dogs) {
 		this.email = email;
 		this.dogs = dogs;
 	}
 	
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", dogs=" + dogs + "]";
+	}
+
 	protected User() {}
 
 	public String getEmail() {

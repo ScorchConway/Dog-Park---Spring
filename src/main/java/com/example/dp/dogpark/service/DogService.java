@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dp.dogpark.domain.Dog;
 import com.example.dp.dogpark.domain.DogSize;
+import com.example.dp.dogpark.domain.User;
 import com.example.dp.dogpark.repository.DogRepository;
 
 @Service
@@ -37,4 +38,5 @@ public class DogService {
 	public long total() {
 		return dogRepository.count();
 	}
+
 }

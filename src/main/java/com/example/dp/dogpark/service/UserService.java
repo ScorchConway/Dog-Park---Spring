@@ -1,6 +1,6 @@
 package com.example.dp.dogpark.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +26,8 @@ public class UserService {
 	 * 
 	 * @param email
 	 * @param dogs
-	 * @return a new User with an empty list of type Dog
 	 */
-	public User createUser(String email, List<Dog> dogs) {
+	public User createUser(String email, ArrayList<Dog> dogs) {
 		return userRepository.save(new User(email, dogs));
 	}
 	
@@ -38,5 +37,15 @@ public class UserService {
 	
 	public void removeDogFromUser(Dog dog, User user) {
 		user.removeDog(dog);
+		dogRepository.delete(dog);
+	}
+	
+	public long total() {
+		return userRepository.count();
+	}
+	
+	public String toString(User user) {
+		return "User: " + user + " [email: " + user.getEmail() + 
+				" , dogs: [" + user.getDogs() + "]]";
 	}
 }

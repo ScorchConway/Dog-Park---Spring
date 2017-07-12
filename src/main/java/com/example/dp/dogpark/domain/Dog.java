@@ -1,10 +1,11 @@
 package com.example.dp.dogpark.domain;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Dog {
@@ -24,6 +25,9 @@ public class Dog {
 	
 	@Column
 	private String[] characteristics;
+	
+//	@ManyToOne
+//	private User user;
 
 	public Dog(
 			String name,
@@ -36,6 +40,12 @@ public class Dog {
 		this.characteristics = characteristics;
 	}
 	
+	@Override
+	public String toString() {
+		return "Dog [id=" + id + ", name=" + name + ", breed=" + breed + ", dogSize=" + dogSize + ", characteristics="
+				+ Arrays.toString(characteristics) + "]";
+	}
+
 	protected Dog() {}
 
 	public Integer getId() {
