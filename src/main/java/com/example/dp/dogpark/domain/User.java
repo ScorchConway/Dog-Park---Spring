@@ -21,10 +21,14 @@ public class User {
 	
 	@OneToMany
 	private List<Dog> dogs;
+	
+	@Column
+	private ArrayList<Park> starredParks;
 
 	public User(String email, ArrayList<Dog> dogs) {
 		this.email = email;
 		this.dogs = dogs;
+		this.starredParks = new ArrayList<Park>();
 	}
 	
 	@Override
@@ -52,5 +56,17 @@ public class User {
 
 	public void removeDog(Dog dog) {
 		this.dogs.remove(dog);
+	}
+	
+	public List<Park> getStarredParks() {
+		return starredParks;
+	}
+
+	public void addStarredPark(Park park) {
+		this.starredParks.add(park);
+	}
+	
+	public void removeStarredPark(Park park) {
+		this.starredParks.remove(park);
 	}
 }

@@ -1,11 +1,13 @@
 package com.example.dp.dogpark.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dp.dogpark.domain.Dog;
+import com.example.dp.dogpark.domain.Park;
 import com.example.dp.dogpark.domain.User;
 import com.example.dp.dogpark.repository.DogRepository;
 import com.example.dp.dogpark.repository.UserRepository;
@@ -40,6 +42,10 @@ public class UserService {
 		dogRepository.delete(dog);
 	}
 	
+	public List<Dog> getDogs(User user) {
+		return user.getDogs();
+	}
+	
 	public long total() {
 		return userRepository.count();
 	}
@@ -47,5 +53,13 @@ public class UserService {
 	public String toString(User user) {
 		return "User: " + user + " [email: " + user.getEmail() + 
 				" , dogs: [" + user.getDogs() + "]]";
+	}
+	
+	public void addStarredPark(Park park, User user) {
+		user.addStarredPark(park);
+	}
+	
+	public void removeStarredPark(Park park, User user) {
+		user.removeStarredPark(park);
 	}
 }
