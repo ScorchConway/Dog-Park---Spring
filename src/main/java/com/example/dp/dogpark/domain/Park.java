@@ -6,21 +6,41 @@ import javax.persistence.*;
 public class Park {
 
 	@Id
-	private String website;
+	@GeneratedValue
+	private Integer id;
 	
 	@Embedded
 	private ParkAddress address;
 	
+	@Column String name;
+	
+	@Column
+	private String website;
+
 	@Column
 	private String gMapsLink;
+
+	@Column
+	private Integer numOfDogsCheckedIn;
 	
-	public Park(ParkAddress address, String website, String gMapsLink) {
+	public Park(String name, ParkAddress address, String website, String gMapsLink) {
+		this.name = name;
 		this.address = address;
 		this.website = website;
 		this.gMapsLink = gMapsLink;
+		this.numOfDogsCheckedIn = 0;
+		
 	}
 
 	protected Park() {}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	public ParkAddress getAddress() {
 		return address;
@@ -46,5 +66,12 @@ public class Park {
 		this.gMapsLink = gMapsLink;
 	}
 	
+	public Integer getNumOfDogsCheckedIn() {
+		return numOfDogsCheckedIn;
+	}
+
+	public void setNumOfDogsCheckedIn(Integer dogsToAdd) {
+		this.numOfDogsCheckedIn = numOfDogsCheckedIn + dogsToAdd;
+	}
 	
 }

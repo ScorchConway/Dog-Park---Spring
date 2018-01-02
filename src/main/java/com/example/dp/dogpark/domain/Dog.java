@@ -6,24 +6,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "dog")
 public class Dog {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Column
+	@Column(name="name")
 	private String name;
 	
-	@Column
+	@Column(name="breed")
 	private String breed;
 	
-	@Column
+	@Column(name="dogSize")
 	private DogSize dogSize;
 	
-	@Column
+	@Column(name="characteristics")
 	private String[] characteristics;
 	
 //	@ManyToOne
