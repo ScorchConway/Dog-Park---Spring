@@ -33,7 +33,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", dogs=" + dogs + "]";
+		return "User [id=" + id + ", email=" + email + ", dogs=" + dogs + ", starredParks=" + starredParks + "]";
 	}
 
 	protected User() {}

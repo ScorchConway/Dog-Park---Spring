@@ -11,8 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 import com.example.dp.dogpark.domain.Dog;
 import com.example.dp.dogpark.domain.DogSize;
+import com.example.dp.dogpark.domain.Park;
+import com.example.dp.dogpark.domain.ParkAddress;
 import com.example.dp.dogpark.domain.User;
 import com.example.dp.dogpark.service.DogService;
+import com.example.dp.dogpark.service.ParkService;
 import com.example.dp.dogpark.service.UserService;
 
 
@@ -25,6 +28,8 @@ public class DogparkApplication implements CommandLineRunner {
 	private DogService dogService;
 	@Autowired
 	private UserService userService;
+	@Autowired 
+	ParkService parkService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DogparkApplication.class, args);
@@ -40,6 +45,15 @@ public class DogparkApplication implements CommandLineRunner {
 		dog = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, new String[]{"ball hog", "high energy", "likes people"});
 		user.addDog(dog);
 		
+		Park park = parkService.createPark("Shawnee Mission Off Leash Area", new ParkAddress("7900 Renner Rd", "", "Shawnee", "KS", 66219)
+				, "http://www.jcprd.com/parks_facilities/shawnee_mission.cfm"
+				, "https://www.google.com/maps/place/Shawnee+Mission+Park+Dog+Off-Leash+Area/@38.9796246,-94.8034713,15z/data=!4m5!3m4!1s0x0:0xaaef772be468f025!8m2!3d38.9796246!4d-94.8034713");
+		
+		parkService.createPark("Leawoof Dog Park", new ParkAddress("106th & Lee Boulevard", "", "Leawood", "KS", 66211)
+				, "https://www.leawood.org/parks/dogpark.aspx"
+				, "https://www.google.com/maps/place/Leawoof+Dog+Park/@39.0474457,-94.7417861,11z/data=!4m8!1m2!2m1!1sleawood+dog+park!3m4!1s0x87c0e9a5cb8450ff:0xc46287c51515b4a7!8m2!3d38.9332894!4d-94.6116024");
+		
+		System.out.println("park: " + park.toString());
 		System.out.println("dog: " + dog.toString());
 		System.out.println("user: " + user.toString());
 		

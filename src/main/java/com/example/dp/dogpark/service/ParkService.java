@@ -10,6 +10,7 @@ import com.example.dp.dogpark.repository.ParkRepository;
 @Service
 public class ParkService {
 
+	@Autowired
 	private ParkRepository parkRepository;
 	
 	@Autowired
@@ -53,4 +54,7 @@ public class ParkService {
 		return park.getNumOfDogsCheckedIn();
 	}
 	
+	public int count() {
+		return (int) parkRepository.count();
+	}
 }

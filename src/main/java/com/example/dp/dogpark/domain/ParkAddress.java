@@ -6,6 +6,12 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ParkAddress {
 	
+	@Override
+	public String toString() {
+		return "ParkAddress [street=" + street + ", streetLineTwo=" + streetLineTwo + ", city=" + city + ", state="
+				+ state + ", zipcode=" + zipcode + "]";
+	}
+
 	@Column
 	private String street;
 	
@@ -28,6 +34,8 @@ public class ParkAddress {
 		this.state = state;
 		this.zipcode = zipcode;
 	}
+	
+	public ParkAddress(){}
 
 	public String getStreet() {
 		return street;

@@ -34,6 +34,12 @@ public class Park {
 
 	protected Park() {}
 	
+	@Override
+	public String toString() {
+		return "Park [id=" + id + ", address=" + address.toString() + ", name=" + name + ", website=" + website + ", gMapsLink="
+				+ gMapsLink + ", numOfDogsCheckedIn=" + numOfDogsCheckedIn + "]";
+	}
+
 	public String getName() {
 		return name;
 	}

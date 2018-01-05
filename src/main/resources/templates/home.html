@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+	  <title>Home</title>
+	</head>
+	<body>
+	  <a href="/logout">logout</a>
+	  <h2>Home page for Dog Park app</h2>
+	  
+	  <h2>There are <span th:text="${numOfParks}">default text?</span> parks</h2>
+	  <p>User is: <span th:text="${user}"></span></p>
+	  <ul th:each="park: ${parks}">
+	     <li th:text="${park.name}"></li>
+	     <li th:text="${park.address}"></li>
+       <li th:text="${park.website}"></li>
+             <li th:text="${park.numOfDogsCheckedIn}"></li>
+       
+	     
+	  </ul> 
+	  
+	</body>
+</html>
