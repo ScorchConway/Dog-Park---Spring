@@ -34,7 +34,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/")
 	public String getHomePage(HttpServletRequest request, Model model) {
-		System.out.println("In HomeController > getHomePage");
 		
 		int numOfParks = parkService.count();
 		model.addAttribute("numOfParks", numOfParks);
@@ -42,12 +41,15 @@ public class HomeController {
 		ArrayList<Park> parks = (ArrayList<Park>) parkService.findAll();
 		model.addAttribute("parks", parks);
 		
-		//I'm curious what this returns
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		model.addAttribute("user", auth);
+		//user object
+		String auth = SecurityContextHolder.getContext().getAuthentication().getName();
 		System.out.println("auth: " + auth);
 
-		//if signed in
+		//user email
+		
+		
+		
+		//TODO: if signed in
 		if(auth != null) {
 			//add auth to model (includes user's dogs right?)
 			//I think we can get user.dogs, user.starredParks, etc from this attribute
