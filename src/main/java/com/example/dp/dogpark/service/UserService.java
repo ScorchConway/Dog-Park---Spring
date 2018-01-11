@@ -29,8 +29,8 @@ public class UserService {
 	 * @param email
 	 * @param dogs
 	 */
-	public User createUser(String email, ArrayList<Dog> dogs) {
-		return userRepository.save(new User(email, dogs));
+	public User createUser(String email, String password, ArrayList<Dog> dogs) {
+		return userRepository.save(new User(email, password, dogs));
 	}
 	
 	public void addDogToUser(Dog dog, User user) {

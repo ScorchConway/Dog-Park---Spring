@@ -14,6 +14,7 @@ import com.example.dp.dogpark.domain.DogSize;
 import com.example.dp.dogpark.domain.Park;
 import com.example.dp.dogpark.domain.ParkAddress;
 import com.example.dp.dogpark.domain.User;
+import com.example.dp.dogpark.domain.UserRole;
 import com.example.dp.dogpark.service.DogService;
 import com.example.dp.dogpark.service.ParkService;
 import com.example.dp.dogpark.service.UserService;
@@ -38,12 +39,11 @@ public class DogparkApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		
-		User user = userService.createUser("example@email.com", new ArrayList<Dog>());
-		Dog dog = dogService.createDog("Atticus", "Golden Retreiver", DogSize.Large, new String[]{"playful", "ball hog", "likes people"});
-		user.addDog(dog);
-		
-		dog = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, new String[]{"ball hog", "high energy", "likes people"});
-		user.addDog(dog);
+		User user = userService.createUser("example@email.com", "password", new ArrayList<Dog>());
+		Dog atticus = dogService.createDog("Atticus", "Golden Retreiver", DogSize.Large, new String[]{"playful", "ball hog", "likes people"});
+		user.addDog(atticus);
+		Dog ripley = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, new String[]{"ball hog", "high energy", "likes people"});
+		user.addDog(ripley);
 		
 		Park park = parkService.createPark("Shawnee Mission Off Leash Area", new ParkAddress("7900 Renner Rd", "", "Shawnee", "KS", 66219)
 				, "http://www.jcprd.com/parks_facilities/shawnee_mission.cfm"
@@ -53,8 +53,11 @@ public class DogparkApplication implements CommandLineRunner {
 				, "https://www.leawood.org/parks/dogpark.aspx"
 				, "https://www.google.com/maps/place/Leawoof+Dog+Park/@39.0474457,-94.7417861,11z/data=!4m8!1m2!2m1!1sleawood+dog+park!3m4!1s0x87c0e9a5cb8450ff:0xc46287c51515b4a7!8m2!3d38.9332894!4d-94.6116024");
 		
+		UserRole userRole = new UserRole("ROLE_USER", "user");
+		UserRole adminRole = new UserRole("ROLE_ADMIN", "admin");
+		
 		System.out.println("park: " + park.toString());
-		System.out.println("dog: " + dog.toString());
+		System.out.println("dog: " + atticus.toString());
 		System.out.println("user: " + user.toString());
 		
 		
