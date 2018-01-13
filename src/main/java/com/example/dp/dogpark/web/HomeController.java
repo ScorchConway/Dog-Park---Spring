@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,20 +42,25 @@ public class HomeController {
 		ArrayList<Park> parks = (ArrayList<Park>) parkService.findAll();
 		model.addAttribute("parks", parks);
 		
-		//user object
-		String auth = SecurityContextHolder.getContext().getAuthentication().getName();
-		System.out.println("auth: " + auth);
-
-		//user email
 		
 		
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String email = "";
 		//TODO: if signed in
 		if(auth != null) {
-			//add auth to model (includes user's dogs right?)
-			//I think we can get user.dogs, user.starredParks, etc from this attribute
-			//to hide implementation details from HTML, add user attributes to the model separately
+			Object user = auth.getPrincipal();
+			
+			if(user instanceof UserDetails) {
+				email = ((UserDetails)user).getUsername();
+			} else {
+				email = user.toString();
+			}
+			
+			model.addAttribute("email", email);
 			System.out.println("user signed IN");
+			System.out.println("auth.toString: " + auth.toString());
+			System.out.println("email: " + email);
 
 		} else {
 			//else if not signed in
@@ -69,4 +75,6 @@ public class HomeController {
 		System.out.println("In HomeController > updateFoo");
 		return "updateUserProfile";
 	}
+	
+	
 }
