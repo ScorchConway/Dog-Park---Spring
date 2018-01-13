@@ -15,7 +15,9 @@ import com.example.dp.dogpark.repository.UserRepository;
 @Service
 public class UserService {
 
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private DogRepository dogRepository;
 
 	@Autowired
@@ -31,6 +33,10 @@ public class UserService {
 	 */
 	public User createUser(String email, String password, ArrayList<Dog> dogs) {
 		return userRepository.save(new User(email, password, dogs));
+	}
+	
+	public User findByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 	
 	public void addDogToUser(Dog dog, User user) {

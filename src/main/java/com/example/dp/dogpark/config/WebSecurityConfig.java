@@ -10,20 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.dp.dogpark.service.MyUserDetailsService;
+import com.example.dp.dogpark.security.MyUserDetailsService;
+import com.example.dp.dogpark.security.UserAuthenticationProvider;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
+	private UserAuthenticationProvider userAuthenticationProvider;
+	
+	@Autowired
 	@Qualifier("userDetailsService")
 	MyUserDetailsService userDetailsService;
 	
-	// registers MyUserDetailsService as a custom UserDetailsService
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.authenticationProvider(userAuthenticationProvider);
 	}
 
 	@Bean
