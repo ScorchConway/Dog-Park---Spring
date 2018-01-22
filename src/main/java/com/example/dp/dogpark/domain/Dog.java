@@ -1,5 +1,6 @@
 package com.example.dp.dogpark.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ public class Dog {
 	private DogSize dogSize;
 	
 	@Column(name="characteristics")
-	private String[] characteristics;
+	private ArrayList<String> characteristics;
 	
 //	@ManyToOne
 //	private User user;
@@ -35,7 +36,7 @@ public class Dog {
 			String name,
 			String breed, 
 			DogSize size, 
-			String[] characteristics) {
+			ArrayList<String> characteristics) {
 		this.name = name;
 		this.breed = breed;
 		this.dogSize = size;
@@ -45,7 +46,7 @@ public class Dog {
 	@Override
 	public String toString() {
 		return "Dog [id=" + id + ", name=" + name + ", breed=" + breed + ", dogSize=" + dogSize + ", characteristics="
-				+ Arrays.toString(characteristics) + "]";
+				+ characteristics.toString() + "]";
 	}
 
 	protected Dog() {}
@@ -82,11 +83,11 @@ public class Dog {
 		this.dogSize = size;
 	}
 
-	public String[] getCharacteristics() {
+	public ArrayList<String> getCharacteristics() {
 		return characteristics;
 	}
 
-	public void setCharacteristics(String[] characteristics) {
+	public void setCharacteristics(ArrayList<String> characteristics) {
 		this.characteristics = characteristics;
 	}
 	

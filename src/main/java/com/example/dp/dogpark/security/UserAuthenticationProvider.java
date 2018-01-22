@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+// this class is autowired in WebSecurityConfig
+
 @Component
 public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
@@ -23,10 +25,11 @@ public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 	//if any of those are bad, the class throws an authentication exception for us
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
-			UsernamePasswordAuthenticationToken authenticationToken) throws AuthenticationException {
+												  UsernamePasswordAuthenticationToken authenticationToken) 
+												  throws AuthenticationException {
 		
 		if(authenticationToken.getCredentials() == null || userDetails.getPassword() == null) {
-			throw new BadCredentialsException("Credentials may not be nul.");
+			throw new BadCredentialsException("Credentials may not be null.");
 		}
 		
 		if( ! passwordEncoder.matches((String) authenticationToken.getCredentials(), userDetails.getPassword())) {

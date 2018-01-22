@@ -18,6 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.dp.dogpark.domain.UserRole;
 import com.example.dp.dogpark.service.UserService;
 
+
+// This class has one public method loadUserByUsername
+// that accepts a String email and returns a userdetails object for that user if they exist
+
 @Service("userDetailsService")
 public class MyUserDetailsService implements UserDetailsService {
 
@@ -32,7 +36,9 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Transactional(readOnly=true)
 	@Override
 	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+		System.out.println("MyUserDetailsService > loadUserByUsername() email:" + email);
 		com.example.dp.dogpark.domain.User dogparkUser = userService.findByEmail(email); 
+		System.out.println("MyUserDetailsService > loadUserByUsername() dogparkUser.toString(): " + dogparkUser.toString());
 		List<GrantedAuthority> authorities = buildUserAuthority(dogparkUser.getUserRole());
 		return buildUserForAuthentication(dogparkUser, authorities);
 	}
@@ -49,7 +55,9 @@ public class MyUserDetailsService implements UserDetailsService {
 
     // Converts user to a spring security userdetails object
     private User buildUserForAuthentication(com.example.dp.dogpark.domain.User user, List<GrantedAuthority> authorities) {
-    	return new User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
+    	User userdetails = new User(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, authorities);
+    	System.out.println("MyUserDetailsService returned userDetails: " + userdetails.toString());
+    	return userdetails;
     }
 }
 

@@ -12,12 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -27,6 +27,10 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	@NotEmpty
+	@Column //need not be unique
+	private String username;
 	
 	@NotNull
 	@Column(unique=true)
@@ -41,7 +45,6 @@ public class User implements UserDetails {
 	@Column
 	private ArrayList<Park> starredParks;
 	
-
 	@NotNull
 	private boolean enabled = true;
 	
@@ -72,11 +75,12 @@ public class User implements UserDetails {
 //			)
 	Set<UserRole> userRoles;
 
-	public User(String email, String password, ArrayList<Dog> dogs) {
+	public User(String email, String username, String password) {
 		this.email = email;
+		this.username = username;
 		this.password = password;
 		this.enabled = true;
-		this.dogs = dogs;
+		this.dogs = new ArrayList<Dog>();
 		this.starredParks = new ArrayList<Park>();
 		this.userRoles = new HashSet<UserRole>();
 		this.userRoles.add(new UserRole("ROLE_USER", "user"));

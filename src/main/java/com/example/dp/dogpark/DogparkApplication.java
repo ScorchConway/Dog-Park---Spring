@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.dp.dogpark.domain.Dog;
 import com.example.dp.dogpark.domain.DogSize;
@@ -19,9 +20,6 @@ import com.example.dp.dogpark.service.DogService;
 import com.example.dp.dogpark.service.ParkService;
 import com.example.dp.dogpark.service.UserService;
 
-
-
-@EnableWebSecurity
 @SpringBootApplication
 public class DogparkApplication implements CommandLineRunner {
 
@@ -30,7 +28,7 @@ public class DogparkApplication implements CommandLineRunner {
 	@Autowired
 	private UserService userService;
 	@Autowired 
-	ParkService parkService;
+	private ParkService parkService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DogparkApplication.class, args);
@@ -39,10 +37,19 @@ public class DogparkApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		
-		User user = userService.createUser("example@email.com", "password", new ArrayList<Dog>());
-		Dog atticus = dogService.createDog("Atticus", "Golden Retreiver", DogSize.Large, new String[]{"playful", "ball hog", "likes people"});
+		ArrayList<String> atticusChars = new ArrayList<String>();
+		atticusChars.add("playful");
+		atticusChars.add("ball hog");
+		atticusChars.add("likes people");
+		ArrayList<String> ripleyChars = new ArrayList<String>();
+		ripleyChars.add("ball hog");
+		ripleyChars.add("high energy");
+		ripleyChars.add("likes people");
+		
+		User user = userService.createUser("example@email.com", "Aname", "$2a$04$wd92mKo/qCEk7DY/4W.7MezU4.D.jQAtRmTJN9aybU.G5uiCkG3ZC"); //password is "password"
+		Dog atticus = dogService.createDog("Atticus", "Golden Retreiver", DogSize.Large, atticusChars);
 		user.addDog(atticus);
-		Dog ripley = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, new String[]{"ball hog", "high energy", "likes people"});
+		Dog ripley = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, ripleyChars);
 		user.addDog(ripley);
 		
 		Park park = parkService.createPark("Shawnee Mission Off Leash Area", new ParkAddress("7900 Renner Rd", "", "Shawnee", "KS", 66219)

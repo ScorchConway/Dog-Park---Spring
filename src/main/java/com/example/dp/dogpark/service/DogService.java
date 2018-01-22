@@ -1,5 +1,7 @@
 package com.example.dp.dogpark.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +29,7 @@ public class DogService {
 	 * Persist dog to DB, and 
 	 * @return new dog
 	 */
-	public Dog createDog(String name, String breed, DogSize size, String[] characteristics) {
+	public Dog createDog(String name, String breed, DogSize size, ArrayList<String> characteristics) {
 		return dogRepository.save(new Dog(name, breed, size, characteristics));
 	}
 	

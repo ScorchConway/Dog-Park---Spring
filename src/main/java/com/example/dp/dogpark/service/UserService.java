@@ -29,10 +29,11 @@ public class UserService {
 	/**
 	 * 
 	 * @param email
-	 * @param dogs
+	 * @param username
+	 * @param password
 	 */
-	public User createUser(String email, String password, ArrayList<Dog> dogs) {
-		return userRepository.save(new User(email, password, dogs));
+	public User createUser(String email, String username, String password) {
+		return userRepository.save(new User(email, username, password));
 	}
 	
 	public User findByEmail(String email) {

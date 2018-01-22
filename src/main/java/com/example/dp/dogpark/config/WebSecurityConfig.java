@@ -37,17 +37,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.anonymous().disable()
+			.csrf().disable()
+//			.anonymous().disable()  //this line causes infinite redirects to /login
 			.authorizeRequests()
-				.antMatchers("/").permitAll()
+				.antMatchers("/register").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-//				.loginPage("/login")
-//				.permitAll()
-				.and()
-			.logout()
+				.loginPage("/login")
+				.permitAll()
+			.and()
+				.logout()  // logout is automatically applied by WebSecurityConfigurerAdapter. redirects to /login?logout
 				.permitAll();
+		//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"));
+
 	}
 	
 	
