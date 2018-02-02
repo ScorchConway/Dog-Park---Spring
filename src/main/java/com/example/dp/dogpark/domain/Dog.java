@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +21,9 @@ public class Dog {
 	@Column(name="name")
 	private String name;
 	
+	@ManyToOne
+	private User user;	
+	
 	@Column(name="breed")
 	private String breed;
 	
@@ -29,15 +33,15 @@ public class Dog {
 	@Column(name="characteristics")
 	private ArrayList<String> characteristics;
 	
-//	@ManyToOne
-//	private User user;
 
 	public Dog(
 			String name,
+			User user,
 			String breed, 
 			DogSize size, 
 			ArrayList<String> characteristics) {
 		this.name = name;
+		this.user = user;
 		this.breed = breed;
 		this.dogSize = size;
 		this.characteristics = characteristics;

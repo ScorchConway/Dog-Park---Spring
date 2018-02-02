@@ -5,6 +5,7 @@
       <title>Dog Park Login</title>
   </head>
   <body>
+      <p th:text="${registerSuccess}"></p>
       <div th:if="${param.error}">
         Invalid username and password.
       </div>
@@ -18,5 +19,7 @@
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <div><input type="submit" value="Sign In"/></div>
       </form>
+      
+      <a href="/register">Register new account</a>
   </body>
 </html>

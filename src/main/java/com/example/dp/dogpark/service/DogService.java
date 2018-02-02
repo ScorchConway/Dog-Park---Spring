@@ -29,8 +29,8 @@ public class DogService {
 	 * Persist dog to DB, and 
 	 * @return new dog
 	 */
-	public Dog createDog(String name, String breed, DogSize size, ArrayList<String> characteristics) {
-		return dogRepository.save(new Dog(name, breed, size, characteristics));
+	public Dog createDog(String name, User user, String breed, DogSize size, ArrayList<String> characteristics) {
+		return dogRepository.save(new Dog(name, user, breed, size, characteristics));
 	}
 	
 	public Iterable<Dog> findAll() {

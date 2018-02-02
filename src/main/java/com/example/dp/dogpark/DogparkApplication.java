@@ -37,19 +37,21 @@ public class DogparkApplication implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		
+		
+		User user = userService.createUser("example@email.com", "Aname", "$2a$04$wd92mKo/qCEk7DY/4W.7MezU4.D.jQAtRmTJN9aybU.G5uiCkG3ZC"); //password is "password"
+
 		ArrayList<String> atticusChars = new ArrayList<String>();
 		atticusChars.add("playful");
 		atticusChars.add("ball hog");
 		atticusChars.add("likes people");
+		Dog atticus = dogService.createDog("Atticus", user, "Golden Retreiver", DogSize.Large, atticusChars);
+		user.addDog(atticus);
+
 		ArrayList<String> ripleyChars = new ArrayList<String>();
 		ripleyChars.add("ball hog");
 		ripleyChars.add("high energy");
 		ripleyChars.add("likes people");
-		
-		User user = userService.createUser("example@email.com", "Aname", "$2a$04$wd92mKo/qCEk7DY/4W.7MezU4.D.jQAtRmTJN9aybU.G5uiCkG3ZC"); //password is "password"
-		Dog atticus = dogService.createDog("Atticus", "Golden Retreiver", DogSize.Large, atticusChars);
-		user.addDog(atticus);
-		Dog ripley = dogService.createDog("Ripley", "Lab mix", DogSize.Medium, ripleyChars);
+		Dog ripley = dogService.createDog("Ripley", user, "Lab mix", DogSize.Medium, ripleyChars);
 		user.addDog(ripley);
 		
 		Park park = parkService.createPark("Shawnee Mission Off Leash Area", new ParkAddress("7900 Renner Rd", "", "Shawnee", "KS", 66219)

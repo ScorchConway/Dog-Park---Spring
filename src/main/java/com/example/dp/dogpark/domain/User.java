@@ -39,7 +39,7 @@ public class User implements UserDetails {
 	@NotNull
 	private String password;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Dog> dogs;
 	
 	@Column
@@ -64,15 +64,6 @@ public class User implements UserDetails {
 			fetch = FetchType.EAGER,
 			cascade = CascadeType.ALL)
 	@JoinTable
-//	(
-//			name = "UserRole",
-//			joinColumns = @JoinColumn(
-//					name = "userId",
-//					referencedColumnName = "id"),
-//			inverseJoinColumns = @JoinColumn(
-//					name = "userRoleId",
-//					referencedColumnName = "userRoleId")
-//			)
 	Set<UserRole> userRoles;
 
 	public User(String email, String username, String password) {

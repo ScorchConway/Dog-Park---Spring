@@ -36,15 +36,15 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public String getHomePage(HttpServletRequest request, Model model) {
 		
-		model.addAttribute("numOfParks", parkService.count());
-		ArrayList<Park> parks = (ArrayList<Park>) parkService.findAll();
-		model.addAttribute("parks", parks);
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String email = "";
 
 		if(auth != null) {
-			//Object user = auth.getPrincipal();
+
+			model.addAttribute("parks", parkService.findAll());
+			model.addAttribute("numOfParks", parkService.count());
+			
 			UserDetails user = ((UserDetails)auth.getPrincipal());
 			email = user.getUsername();
 			
@@ -63,12 +63,4 @@ public class HomeController {
 		
 		return "home";		
 	}
-	
-	@RequestMapping(value="/update")
-	public static String updateUser() {
-		System.out.println("In HomeController > updateUser()");
-		return "updateUserProfile";
-	}
-	
-	
 }

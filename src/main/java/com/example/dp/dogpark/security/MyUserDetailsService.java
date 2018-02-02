@@ -36,9 +36,10 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Transactional(readOnly=true)
 	@Override
 	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
-		System.out.println("MyUserDetailsService > loadUserByUsername() email:" + email);
+//		System.out.println("MyUserDetailsService > loadUserByUsername() email:" + email);
 		com.example.dp.dogpark.domain.User dogparkUser = userService.findByEmail(email); 
-		System.out.println("MyUserDetailsService > loadUserByUsername() dogparkUser.toString(): " + dogparkUser.toString());
+
+//		System.out.println("MyUserDetailsService > loadUserByUsername() dogparkUser.toString(): " + dogparkUser.toString());
 		List<GrantedAuthority> authorities = buildUserAuthority(dogparkUser.getUserRole());
 		return buildUserForAuthentication(dogparkUser, authorities);
 	}

@@ -9,20 +9,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+//Behind the curtain
+//This class makes sure that a UserDetails fields: enabled, expired, credentialsExpired, locked, are in good standing.
+//if any of those are bad, the class throws an authentication exception for us
 // this class is autowired in WebSecurityConfig
-
 @Component
 public class UserAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
 	@Autowired
 	private MyUserDetailsService userDetailsService;
-	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	//Behind the curtain
-	//This class makes sure that a UserDetails fields: enabled, expired, credentialsExpired, locked, are in good standing.
-	//if any of those are bad, the class throws an authentication exception for us
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 												  UsernamePasswordAuthenticationToken authenticationToken) 
